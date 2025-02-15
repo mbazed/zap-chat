@@ -19,6 +19,7 @@ const Register = () => {
   const { setUsername: setLoggedInUsername, setId } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
+    console.log("Submitting....");
     e.preventDefault();
     setError("");
     if (isLogin ? !email || !password : !email || !username || !password) {
@@ -128,7 +129,7 @@ const Register = () => {
                 {isLogin ? "E-mail or Username" : "E-mail"}
               </label>
               <input
-                type="email"
+                type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1"

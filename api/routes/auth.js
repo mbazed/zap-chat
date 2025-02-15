@@ -255,4 +255,19 @@ router.post("/logout", async (req, res) => {
   res.json({ message: "Logged out successfully" });
 });
 
+router.get("/token", (req, res) => {
+  const accessToken = req.cookies?.accessToken;
+
+  if (!accessToken) {
+    return res.status(401).json({ message: "No access token found" });
+  }
+
+  jwt.verify(accessToken, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: "Invalid or expired token" });
+    }
+    res.json({ accessToken });
+  });
+});
+
 export default router;
